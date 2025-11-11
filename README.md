@@ -39,9 +39,9 @@ This is a two-step RAG process that uses different models for retrieval and gene
 
 To prove the RAG pipeline is effective, we compare its output against a baseline (Gemini answering without context) and grade both.
 
-1.  **Baseline Generation:** The question is sent to `Gemini 1.5 Flash` *without* any context slides.
+1.  **Baseline Generation:** The question is sent to `Gemini 2.5 Flash` *without* any context slides.
 2.  **Gold Standard Comparison:** A "gold standard" answer (as an image) is provided for each question.
-3.  **AI Grading:** `Gemini 1.5 Flash` is used a third time, but as an **evaluator**. It is given the gold image, the RAG answer, and the baseline answer. It scores both candidates from 0.0 to 1.0 based on **approach and format similarity**.
+3.  **AI Grading:** `Gemini 2.5 Flash` is used a third time, but as an **evaluator**. It is given the gold image, the RAG answer, and the baseline answer. It scores both candidates from 0.0 to 1.0 based on **approach and format similarity**.
 
 The final results show that the RAG-powered candidate consistently scores higher in mimicking the correct academic format from the source material.
 
@@ -54,7 +54,7 @@ This project orchestrates four different models for distinct tasks:
 | **Image Summarizer** | `microsoft/Phi-4-multimodal-instruct` | (Stage 1) Creates text summaries from page images. |
 | **Retrieval LLM** | `microsoft/Phi-4-mini-instruct` | (Stage 2) Finds relevant page numbers from the vector DB. |
 | **Embedding** | `sentence-transformers/all-MiniLM-L6-v2` | (Stage 1) Embeds the text summaries for retrieval. |
-| **Generator & Grader**| `Gemini 1.5 Flash` | (Stage 2 & 3) Generates the final answer from images and evaluates the results. |
+| **Generator & Grader**| `Gemini 2.5 Flash` | (Stage 2 & 3) Generates the final answer from images and evaluates the results. |
 | **Framework** | `LangChain` | Orchestrates the RAG chain, prompts, and document loading. |
 | **Vector DB** | `ChromaDB` | Stores and retrieves the page summary embeddings. |
 
@@ -64,9 +64,9 @@ This project orchestrates four different models for distinct tasks:
 > It is highly recommended to run this notebook in **Google Colab**. The environment comes with many of the necessary packages (like `torch`, `transformers`, etc.) pre-installed. The installation script in **Cell 1** is designed for Colab and only installs the *missing* dependencies. Running locally may require additional manual setup for packages like PyTorch with CUDA.
 
 1.  **Open in Colab:**
-    * Upload the `RAG_ML_1111.ipynb` file to your Google Drive.
+    * Upload the `RAG.ipynb` file to your Google Drive.
     * Open the notebook with Google Colaboratory.
-    * Change the runtime type to use a **GPU accelerator** (e.g., T4 or A100) via `Runtime > Change runtime type`. This is required for the `Phi-4` and `flash-attn` models.
+    * Change the runtime type to use a **GPU accelerator** (e.g., A100) via `Runtime > Change runtime type`. This is required for the `Phi-4` and `flash-attn` models.
 
 2.  **Install Dependencies (Cell 1):**
     * Run the first code cell. This will install `langchain`, `chromadb`, `pdf2image`, `poppler-utils`, and other required packages that are not already in the Colab environment.
